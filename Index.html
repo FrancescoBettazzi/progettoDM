@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>progettoDM</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+<body class="ps-5 pt-5">
+<h1 class="text-center w-100 mb-3">Progetto DM WebApp</h1>
+<form class="row g-3" action="" id="formId">
+    <div class="mb-3 col-3">
+        <label for="formFile" class="form-label">Carica File</label>
+        <input class="form-control form-control-sm" type="file" id="formFile" required>
+        <div class="invalid-feedback">
+            Please choose a file.
+        </div>
+    </div>
+    <div class="col-12">
+        <button class="btn btn-sm btn-primary" type="submit" id="caricaFileBtn">Carica</button>
+    </div>
+</form>
+<script>
+    $('#caricaFileBtn').click(function (event) {
+        event.preventDefault();
+        //$('#caricaFileBtn').hide();
+        //$('#thinking').show(); //some div with a nice ajax loader gif...
+        $.ajax({
+            type: 'POST',
+            data: $('#formId').serialize(),
+            url: 'py/uploadFile.py',
+            success: function (data) {
+                //$('#loading').hide();
+                var response = data.result  //now do stuff with your response
+                console.log(response);
+            },
+            error: function (error) {
+                console.log('Error')
+            }
+        });
+    });
+</script>
+</body>
+</html>
